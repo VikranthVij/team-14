@@ -1,6 +1,6 @@
 # 🌾 TinyML-Based Offline Smart Farming Assistant
 
-> A low-cost, portable, offline, intelligent farming companion for smallholder farmers in India, powered by TinyML and real-time sensor data.
+A low-cost, portable, offline, intelligent farming companion for smallholder farmers in India, powered by TinyML and real-time sensor data.
 
 ---
 
@@ -73,6 +73,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-```vbnet
-Copy
-Edit
+
