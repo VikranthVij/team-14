@@ -1,10 +1,9 @@
-# 🌾 TinyML-Based Offline Smart Farming Assistant
-### Team 14 – Hackslayers
+# Smart Farming Assistant
 
 ## Project Overview
-A **low-cost**, **portable**, and **offline-capable** embedded system designed for real-time **soil health analysis** and **pest detection**, tailored for **smallholder farmers in India**. Powered by **TinyML**, it enables intelligent, on-field agricultural decision-making without internet dependency.
+A portable, offline-capable embedded system for real-time soil health analysis and pest detection, designed for smallholder farmers in India.
 
-## 📋 Project Structure
+## Project Structure
 ```
 smart_farming_assistant_annam/
 ├── /src/           # Source code
@@ -12,10 +11,40 @@ smart_farming_assistant_annam/
 ├── /tests/         # Test suites
 ├── /docs/          # Documentation
 │   ├── /cards/    # Project and model cards
-│   └── /notebooks/ # Notebooks and analysis
+│   └── notebooks/  # Notebooks
 ├── /data/          # Data and datasets
-├── /notebooks/     # Jupyter notebooks
-└── /logs/          # Application logs
+└── notebooks/      # Jupyter notebooks
+```
+
+## Setup Instructions
+
+### Prerequisites
+- Python 3.8+
+- Docker
+- ESP-IDF for ESP32 development
+- Arduino IDE
+
+### Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/annam-ai-iitropar/smart_farming_assistant_annam.git
+cd smart_farming_assistant_annam
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Download datasets:
+```bash
+bash data/download.sh
+```
+
+4. Build and run Docker container:
+```bash
+docker build -t smart_farming_assistant .
+docker run -it smart_farming_assistant
 ```
 
 ## 🛠️ Setup Instructions
@@ -65,8 +94,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 | Layer              | Tool / Framework                         | Purpose                                       |
 |-------------------|-------------------------------------------|-----------------------------------------------|
 | Data Collection    | Arduino IDE, Python, Edge Impulse         | Collect labeled datasets (images, audio, soil)|
-| Model Training     | Edge Impulse Studio / TensorFlow Lite     | Train models (CNN, Spectrogram classifiers)   |
-| On-Device Inference| TensorFlow Lite for Microcontrollers (TFLM)| Run optimized ML models on MCU                |
+| Model Training     | Edge Impulse Studio / ONNX                 | Train models (CNN, Spectrogram classifiers)   |
+| On-Device Inference| ONNX Runtime for Microcontrollers         | Run optimized ML models on MCU                |
 | Firmware           | C/C++ + PlatformIO / Arduino Framework    | Sensor drivers, pre/post-processing, control  |
 | UI/UX              | OLED / LCD via I2C                        | Feedback interface (English, Local Lang. TTS*)|
 
