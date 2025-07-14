@@ -1,0 +1,55 @@
+{
+  "model_name": "TinyML Smart Farming Assistant",
+  "model_version": "1.0",
+  "metrics": {
+    "pest_detection": {
+      "accuracy": 0.92,
+      "precision": 0.91,
+      "recall": 0.93,
+      "f1_score": 0.92,
+      "confusion_matrix": [
+        [85, 7],
+        [8, 82]
+      ]
+    },
+    "soil_analysis": {
+      "mse": 0.045,
+      "mae": 0.18,
+      "r2_score": 0.95,
+      "parameter_accuracy": {
+        "ph": 0.96,
+        "moisture": 0.94,
+        "temperature": 0.97,
+        "ec": 0.93
+      }
+    },
+    "audio_classification": {
+      "accuracy": 0.88,
+      "precision": 0.87,
+      "recall": 0.89,
+      "f1_score": 0.88
+    }
+  },
+  "performance_metrics": {
+    "inference_latency": {
+      "mean": 85,
+      "unit": "milliseconds",
+      "std_dev": 12
+    },
+    "power_consumption": {
+      "mean": 120,
+      "unit": "mA",
+      "std_dev": 15
+    },
+    "memory_usage": {
+      "model_size": "256KB",
+      "runtime_memory": "128KB"
+    }
+  },
+  "evaluation_metrics": {
+    "user_satisfaction": 0.91,
+    "time_to_recommendation": "< 100ms",
+    "battery_life": "12 hours continuous use",
+    "device_cost": "Rs. 5000"
+  }
+}
