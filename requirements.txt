@@ -1,6 +1,2 @@
-torch
-pandas
-scikit-learn
-matplotlib
-onnx
-onnxruntime
+streamlit
+Pillow

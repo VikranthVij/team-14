@@ -36,15 +36,23 @@ cd smart_farming_assistant_annam
 pip install -r requirements.txt
 ```
 
-3. Download datasets:
+3. Run the Streamlit app:
 ```bash
-bash data/download.sh
+# Navigate to app directory
+cd app
+
+# Run the app
+python -m streamlit run main.py
 ```
 
-4. Build and run Docker container:
+4. Open your browser and navigate to:
+- Local URL: http://localhost:8501
+- Network URL: http://your-ip-address:8501
+
+5. For Docker deployment:
 ```bash
 docker build -t smart_farming_assistant .
-docker run -it smart_farming_assistant
+docker run -p 8501:8501 smart_farming_assistant
 ```
 
 ## 🛠️ Setup Instructions

@@ -18,5 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 WORKDIR /app
 
+# Expose port for Streamlit
+EXPOSE 8501
+
 # Run the application
-CMD ["python", "app/main.py"]
+CMD ["streamlit", "run", "app/main.py"]

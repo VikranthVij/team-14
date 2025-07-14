@@ -1,0 +1,81 @@
+/* General Styles */
+body {
+    background-color: #f5f5f5;
+}
+
+/* Header Styles */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Metric Styles */
+.stMetricValue {
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+/* Card Styles */
+.stCard {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+/* Sidebar Styles */
+.sidebar .sidebar-content {
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Input Styles */
+.stNumberInput, .stSlider {
+    margin-bottom: 1rem;
+}
+
+/* Success Message Styles */
+.stSuccess {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+/* Info Message Styles */
+.stInfo {
+    background-color: #2196F3;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+/* Column Styles */
+.stColumns {
+    gap: 1rem;
+}
+
+/* Image Styles */
+.stImage {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
