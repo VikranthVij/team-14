@@ -49,7 +49,7 @@ def load_model():
     model.classifier[1] = nn.Conv2d(512, num_classes, kernel_size=(1, 1))
     model.num_classes = num_classes
     model.load_state_dict(torch.load(
-        "team_14/Pest_Image_management/ccmt_squeezenet_cleaned_20250719_102240_25epochs.pth",
+        "Pest_Image_management/ccmt_squeezenet_cleaned_20250719_102240_25epochs.pth",
         map_location="cpu"
     ))
     model.eval()
@@ -58,7 +58,7 @@ def load_model():
 model = load_model()
 
 # === Load classes ===
-with open("team_14/Pest_Image_management/pest_classes.txt") as f:
+with open("Pest_Image_management/pest_classes.txt") as f:
     CLASSES = [line.strip() for line in f]
 
 # === Transform ===

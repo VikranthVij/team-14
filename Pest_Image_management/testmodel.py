@@ -4,8 +4,8 @@ from torchvision import models, transforms
 from PIL import Image
 
 # === Config ===
-MODEL_PATH = "team_14/Pest_Image_management/ccmt_squeezenet_cleaned_20250719_102240_25epochs.pth"  # update!
-CLASSES_PATH = "team_14/Pest_Image_management/pest_classes.txt"
+MODEL_PATH = "Pest_Image_management/ccmt_squeezenet_cleaned_20250719_102240_25epochs.pth"  # update!
+CLASSES_PATH = "Pest_Image_management/pest_classes.txt"
 TEST_IMAGE = "/Users/devilphoenix/Vikranth/Hackathons/Annam.ai/Datasets/CCMT_Cleaned/healthy/Cashew_healthy_7.jpg"
 
 # === Load class names ===
