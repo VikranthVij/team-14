@@ -1,2 +1,6 @@
+torch
+torchvision
 streamlit
 Pillow
+numpy
+onnxruntime
