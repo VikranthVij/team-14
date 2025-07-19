@@ -5,22 +5,33 @@ import torch.optim as optim
 from torchvision import transforms, models
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import ImageFolder
-from datetime import datetime
+from datetime import datetime   
 import matplotlib.pyplot as plt
-from PIL import Image, UnidentifiedImageError, ImageFile
+from PIL import UnidentifiedImageError, ImageFile
 
-# Allow PIL to load broken images safely
+# Allow PIL to load broken images
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # === CONFIG ===
-DATA_DIR = "/Users/devilphoenix/Vikranth/Hackathons/Annam.ai/Datasets/Dataset for Crop Pest and Disease Detection/Raw Data/CCMT Dataset"
+DATA_DIR = "/Users/devilphoenix/Vikranth/Hackathons/Annam.ai/Datasets/CCMT_Cleaned"
 BATCH_SIZE = 32
-EPOCHS = 2
+EPOCHS = 25  # ⬅️ Upgraded!
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_SAVE_NAME = f"ccmt_squeezenet_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pth"
+MODEL_SAVE_NAME = f"ccmt_squeezenet_cleaned_{datetime.now().strftime('%Y%m%d_%H%M%S')}_25epochs.pth"
+
 
 # === TRANSFORMS ===
-transform = transforms.Compose([
+train_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomRotation(20),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406],
+                         [0.229, 0.224, 0.225])
+])
+
+val_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406],
@@ -42,19 +53,23 @@ class SafeImageFolder(ImageFolder):
             target = self.target_transform(target)
         return sample, target
 
-dataset = SafeImageFolder(DATA_DIR, transform=transform)
-num_classes = len(dataset.classes)
-print(f"✅ Found {num_classes} classes: {dataset.classes}")
+full_dataset = SafeImageFolder(DATA_DIR, transform=None)
+num_classes = len(full_dataset.classes)
+print(f"✅ Found {num_classes} classes: {full_dataset.classes}")
 
 # Save class names
 with open("pest_classes.txt", "w") as f:
-    for cls in dataset.classes:
+    for cls in full_dataset.classes:
         f.write(f"{cls}\n")
 
 # === TRAIN/VAL SPLIT ===
-train_size = int(0.8 * len(dataset))
-val_size = len(dataset) - train_size
-train_ds, val_ds = random_split(dataset, [train_size, val_size])
+train_size = int(0.8 * len(full_dataset))
+val_size = len(full_dataset) - train_size
+train_ds, val_ds = random_split(full_dataset, [train_size, val_size])
+
+train_ds.dataset.transform = train_transform
+val_ds.dataset.transform = val_transform
+
 train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE)
 
@@ -70,8 +85,7 @@ optimizer = optim.Adam(model.parameters(), lr=1e-4)
 
 # === TRAINING ===
 train_losses, val_losses, val_accuracies = [], [], []
-
-print(f"🔍 Training on device: {DEVICE} (SqueezeNet 1.1)")
+print(f"🔍 Training on: {DEVICE} | Model: SqueezeNet + Augment | EPOCHS: {EPOCHS}")
 
 for epoch in range(EPOCHS):
     model.train()
@@ -103,11 +117,11 @@ for epoch in range(EPOCHS):
     val_acc = 100 * correct / total
     val_accuracies.append(val_acc)
 
-    print(f"Epoch {epoch+1}/{EPOCHS} | Train Loss: {train_loss:.4f} | Val Acc: {val_acc:.2f}%")
+    print(f"✅ Epoch {epoch+1}/{EPOCHS} | Train Loss: {train_loss:.4f} | Val Acc: {val_acc:.2f}%")
 
 # === SAVE MODEL ===
 torch.save(model.state_dict(), MODEL_SAVE_NAME)
-print(f"✅ Model saved as {MODEL_SAVE_NAME}")
+print(f"✅ Model saved: {MODEL_SAVE_NAME}")
 
 # === PLOT ===
 plt.figure(figsize=(12, 5))
@@ -123,5 +137,5 @@ plt.title("Validation Accuracy")
 plt.legend()
 
 plt.tight_layout()
-plt.savefig("ccmt_squeezenet_training_plot.png")
+plt.savefig("ccmt_squeezenet_aug_training_plot_25epochs.png")
 plt.show()

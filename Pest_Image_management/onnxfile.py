@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchvision import models
 
 # === Your same config ===
-num_classes = 4  # update if needed
+num_classes = 19  # update if needed
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # === 1) Define same SqueezeNet ===
@@ -13,7 +13,7 @@ model.num_classes = num_classes
 model = model.to(DEVICE)
 
 # === 2) Load your saved weights ===
-model.load_state_dict(torch.load("ccmt_squeezenet_20250710_231828.pth", map_location=DEVICE))
+model.load_state_dict(torch.load("ccmt_squeezenet_cleaned_20250719_102240_25epochs.pth", map_location=DEVICE))
 model.eval()
 
 print("✅ Weights loaded!")
@@ -22,7 +22,7 @@ print("✅ Weights loaded!")
 dummy_input = torch.randn(1, 3, 224, 224).to(DEVICE)
 
 # === 4) Export to ONNX ===
-onnx_file_name = "YOUR_SAVED_MODEL.onnx"
+onnx_file_name = "YOUR_SAVED_MODEL_25epochs.onnx"
 
 torch.onnx.export(
     model,
